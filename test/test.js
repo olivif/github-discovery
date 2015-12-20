@@ -4,6 +4,7 @@ var stdout = require("test-console").stdout;
 
 // Dev deps
 var main = require("./../lib/index");
+var utils = require("./../lib/utils");
 
 describe("discovery end to end tests", function() {
   
@@ -31,4 +32,18 @@ describe("discovery end to end tests", function() {
             done();
         })
     });      
+});
+
+describe("utils tests", function() {
+  
+    it("should return correct last month date string", function(done) {
+        
+        var now = new Date();
+        var lastMonthString = now.getFullYear() + "-" + (now.getMonth()-1) + "-" + now.getDate();
+        var lastMonth = utils.getLastMonth();
+        
+        lastMonth.should.eql(lastMonthString);
+        
+        done();
+    });
 });

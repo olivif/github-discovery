@@ -1,16 +1,41 @@
 #! /usr/bin/env node
 
 var program = require('commander');
+var main = require("../lib/index");
  
 program
   .version('0.0.1')
-  .option('-l, --language <l>', 'Filter repos found by language')
-  .option('-n, --number <n>', 'Filter repos found by language', parseInt)
+  .option('-t, --topic <n>', 'filter on a topic')
+  .option('-l, --language <l>', 'filter repos by language')
+  .option('-f, --forksIncluded', 'include forks in the search')
+  .option('-r, --recentlyUpdated', 'only include repos that have been updated recently (last month)')
   .parse(process.argv);
 
 // Args
 console.log("Specified filters: ")
 
-if (program.language) console.log("Language : " + program.language);
-if (program.number) console.log("Number : " + program.number);
-// Language 
+if (program.language) {
+    console.log("Language : " + program.language);  
+} 
+
+if (program.topic) {
+    console.log("Topic : " + program.topic);
+} 
+
+if (program.forksIncluded) {
+    console.log("ForksIncluded : " + program.forksIncluded);
+} 
+
+if (program.recentlyUpdated) {
+    console.log("RecentlyUpdated : " + program.recentlyUpdated);
+} 
+
+var query = main.buildQuery(
+    program.topic, 
+    program.language, 
+    program.forksIncluded, 
+    program.recentlyUpdated
+    );
+console.log("Query = " + query);
+
+main.run(query);
