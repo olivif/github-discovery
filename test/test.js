@@ -12,14 +12,21 @@ describe("discovery end to end tests", function() {
         
         var repo = {
             full_name: "Full name",
-            url: "repoUrl"    
+            url: "repoUrl"   ,
+            stargazers_count: 10,
+            watchers_count: 1,
+            forks_count: 8
         };
         
         var output = stdout.inspectSync(function() {
             main.printRepo(repo);
         });
         
-        should.deepEqual(output, [ "\n", "Full name\n", "repoUrl\n" ]);
+        output[1].indexOf(repo.full_name).should.not.eql(-1);
+        output[1].indexOf(repo.stargazers_count).should.not.eql(-1);
+        output[1].indexOf(repo.watchers_count).should.not.eql(-1);
+        output[1].indexOf(repo.forks_count).should.not.eql(-1);
+        output[2].indexOf(repo.url).should.not.eql(-1);
         done();
     });
       

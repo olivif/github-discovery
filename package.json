@@ -9,6 +9,7 @@
     "gd": "./bin/github-discovery"
   },
   "dependencies": {
+    "chalk": "^1.1.1",
     "commander": "^2.9.0",
     "github-search-repos": "^1.2.1",
     "should": "^8.0.2"

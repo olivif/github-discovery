@@ -25,42 +25,27 @@ $ gd --help
     -l, --language <l>     filter repos by language
     -f, --forksIncluded    include forks in the search
     -r, --recentlyUpdated  only include repos that have been updated recently (last month)
+    -m, --mitLicenseOnly   only include repos that have an MIT license
+    -c, --contribute       only include repos that have contributing documentation
+    -n, --notDeprecated    exclude repos which might be deprecated
 ```
 ### Example
 
 ```sh
-$ gd --language "javascript" --topic x --forksIncluded --recentlyUpdated
+$ gd --topic node --language javascript -f -r -m -c -n
+``` 
 
+You should see some info about your query
+```
 Specified filters:
 Language : javascript
 Topic : x
 ForksIncluded : true
 RecentlyUpdated : true
 Query = x+language:javascript+fork:true+pushed:>2015-10-20
-
-xtk/X
-https://api.github.com/repos/xtk/X
-
-vitalets/x-editable
-https://api.github.com/repos/vitalets/x-editable
-
-lapwinglabs/x-ray
-https://api.github.com/repos/lapwinglabs/x-ray
-
-markitup/1.x
-https://api.github.com/repos/markitup/1.x
-
-Khan/KaTeX
-https://api.github.com/repos/Khan/KaTeX
-
-perftools/xhgui
-https://api.github.com/repos/perftools/xhgui
-
-[...]
-
-Got 30 repos in total!
 ```
 
+And then a list of 30 odd results. 
 
 ## How it works
 
