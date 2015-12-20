@@ -39,13 +39,18 @@ You should see some info about your query
 ```
 Specified filters:
 Language : javascript
-Topic : x
+Topic : node
 ForksIncluded : true
 RecentlyUpdated : true
-Query = x+language:javascript+fork:true+pushed:>2015-10-20
+MitLicenseOnly : true
+Contribute : true
+NotDeprecated : true
+Query = node+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated
 ```
 
 And then a list of 30 odd results. 
+
+![image](https://cloud.githubusercontent.com/assets/7736961/11918473/22fadb18-a733-11e5-8a18-f4b1af1d8961.png)
 
 ## How it works
 
@@ -53,7 +58,7 @@ Based on GitHub's [advanced search API](https://help.github.com/articles/searchi
 
 ## How to contribute
 
-It's still early days for github-discovery. The best way to contribute for now is to try it out and file issues with any ideas, bugs or suggestions. You can see a list of the working ideas [here](https://github.com/olivif/github-discovery#readme). 
+It's still early days for github-discovery. The best way to contribute for now is to try it out and file issues with any ideas, bugs or suggestions. You can see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
 
 #### Code style
 
