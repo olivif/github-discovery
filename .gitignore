@@ -1,0 +1,8 @@
+# node
+node_modules
+
+# vscode
+typings
+
+# Code coverage
+coverage

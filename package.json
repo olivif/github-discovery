@@ -1,0 +1,44 @@
+{
+  "name": "github-discovery",
+  "version": "0.0.1",
+  "description": "A discovery mechanism for github repos. Helps people find repos to contribute to and helps repos be discovered.",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.4.1",
+    "gh-got": "^2.4.0",
+    "github-search-repos": "^1.2.1",
+    "request": "^2.67.0",
+    "should": "^8.0.2"
+  },
+  "devDependencies": {
+    "codecov": ">1.0.0",
+    "istanbul": ">0.3.2",
+    "mocha": "^2.3.4",
+    "test-console": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "mocha",
+    "test-travis-1": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
+    "test-travis-2": "./node_modules/.bin/codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olivif/github-discovery.git"
+  },
+  "keywords": [
+    "github",
+    "discovery",
+    "repos",
+    "repository",
+    "contribute"
+  ],
+  "author": "Olivia Ifrim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/olivif/github-discovery/issues"
+  },
+  "homepage": "https://github.com/olivif/github-discovery#readme"
+}
