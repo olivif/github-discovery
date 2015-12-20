@@ -9,6 +9,7 @@
 * [x] include forks (should include forks, a lot of repos fork off and become a lot more successful than the parent)
 * [x] last updated (yes, you only want to include *fresh* repos)
 * [x] language (yes) 
+* [x] has MIT license 
 * size of repo (buckets?)
 * number of forks (zero or small? buckets again?)
 * number of stars (buckets again?)
@@ -19,7 +20,8 @@
 * last updated
 
 ## Heuristics
-* contains contribute/contributing .md or words in any md files
+* [x] contains contribute/contributing .md or words in any md files
+* [x] doesnt contain the words deprecated
 * owner number of followers?
 * number of contributors
 * tags - what are tags?

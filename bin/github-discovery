@@ -1,14 +1,17 @@
 #! /usr/bin/env node
 
-var program = require('commander');
+var program = require("commander");
 var main = require("../lib/index");
  
 program
-  .version('0.0.1')
-  .option('-t, --topic <n>', 'filter on a topic')
-  .option('-l, --language <l>', 'filter repos by language')
-  .option('-f, --forksIncluded', 'include forks in the search')
-  .option('-r, --recentlyUpdated', 'only include repos that have been updated recently (last month)')
+  .version("0.0.1")
+  .option("-t, --topic <n>", "filter on a topic")
+  .option("-l, --language <l>", "filter repos by language")
+  .option("-f, --forksIncluded", "include forks in the search")
+  .option("-r, --recentlyUpdated", "only include repos that have been updated recently (last month)")
+  .option("-m, --mitLicenseOnly", "only include repos that have an MIT license")
+  .option("-c, --contribute", "only include repos that have contributing documentation")
+  .option("-n, --notDeprecated", "exclude repos which might be deprecated")
   .parse(process.argv);
 
 // Args
@@ -30,11 +33,26 @@ if (program.recentlyUpdated) {
     console.log("RecentlyUpdated : " + program.recentlyUpdated);
 } 
 
+if (program.mitLicenseOnly) {
+    console.log("MitLicenseOnly : " + program.mitLicenseOnly);
+} 
+
+if (program.contribute) {
+    console.log("Contribute : " + program.contribute);
+} 
+
+if (program.notDeprecated) {
+    console.log("NotDeprecated : " + program.notDeprecated);
+} 
+
 var query = main.buildQuery(
     program.topic, 
     program.language, 
     program.forksIncluded, 
-    program.recentlyUpdated
+    program.recentlyUpdated,
+    program.mitLicenseOnly,
+    program.contribute,
+    program.notDeprecated
     );
 console.log("Query = " + query);
 
