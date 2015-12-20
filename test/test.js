@@ -4,9 +4,12 @@ var stdout = require("test-console").stdout;
 
 // Dev deps
 var main = require("./../lib/index");
+var githubApi = require("./../lib/githubApi");
 var utils = require("./../lib/utils");
+var repoHelper = require("./../lib/repoHelper");
+var queryBuilder = require("./../lib/queryBuilder");
 
-describe("discovery end to end tests", function() {
+describe("repo tests", function() {
   
     it("should be able to print a repo", function(done) {
         
@@ -19,7 +22,7 @@ describe("discovery end to end tests", function() {
         };
         
         var output = stdout.inspectSync(function() {
-            main.printRepo(repo);
+            repoHelper.printRepo(repo);
         });
         
         output[1].indexOf(repo.full_name).should.not.eql(-1);
@@ -28,17 +31,7 @@ describe("discovery end to end tests", function() {
         output[1].indexOf(repo.forks_count).should.not.eql(-1);
         output[2].indexOf(repo.url).should.not.eql(-1);
         done();
-    });
-      
-    it("should be able to search repos", function(done) {
-        
-        var query = "gulp+language:javascript";
-        
-        main.searchRepos(query, function(repos) {
-            repos.length.should.not.eql(0);
-            done();
-        })
-    });      
+    });   
 });
 
 describe("utils tests", function() {
@@ -53,4 +46,45 @@ describe("utils tests", function() {
         
         done();
     });
+});
+
+describe("githubApi tests", function() {
+  
+    it("should be able to search repos", function(done) {
+        
+        var query = "gulp+language:javascript";
+        
+        githubApi.searchRepos(query, function(repos) {
+            repos.length.should.not.eql(0);
+            done();
+        })
+    });   
+});
+
+describe("queryBuilder tests", function() {
+  
+    it("should be able to construct query with all args", function(done) {
+        var topic = "myTopic";
+        var language = "javascript";
+        var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
+        
+        query.should.eql("myTopic+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated");
+        
+        done();
+    });   
+});
+
+describe("discovery end to end tests", function() {
+
+    it("should be able to build query and search", function(done) {
+       
+        var topic = "bitcoin";
+        var language = "javascript";
+        var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
+    
+        githubApi.searchRepos(query, function(repos) {
+            repos.length.should.not.eql(0);
+            done();
+        })
+    });   
 });

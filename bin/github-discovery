@@ -2,6 +2,7 @@
 
 var program = require("commander");
 var main = require("../lib/index");
+var queryBuilder = require("../lib/queryBuilder");
  
 program
   .version("0.0.1")
@@ -45,7 +46,7 @@ if (program.notDeprecated) {
     console.log("NotDeprecated : " + program.notDeprecated);
 } 
 
-var query = main.buildQuery(
+var query = queryBuilder.buildQuery(
     program.topic, 
     program.language, 
     program.forksIncluded, 

@@ -58,12 +58,6 @@ Based on GitHub's [advanced search API](https://help.github.com/articles/searchi
 
 ## How to contribute
 
-We would love to get contributors on the project (despite being in the very early stages of it!). 
-You can read [CONTRIBUTING.md](https://github.com/olivif/github-discovery/blob/master/CONTRIBUTING.md).  
-You can also see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
+We would love to get contributors on the project :tada: :balloon: (despite being in the very early stages of it!). 
 
-#### Code style
-
-#### Testing
-We are using mocha and should for testing. And codecov for coverage tracking. All PRs must have at least the coverage currently on master.  
-
+You can read [CONTRIBUTING.md](https://github.com/olivif/github-discovery/blob/master/CONTRIBUTING.md). You can also see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
