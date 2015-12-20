@@ -58,7 +58,9 @@ Based on GitHub's [advanced search API](https://help.github.com/articles/searchi
 
 ## How to contribute
 
-It's still early days for github-discovery. The best way to contribute for now is to try it out and file issues with any ideas, bugs or suggestions. You can see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
+We would love to get contributors on the project (despite being in the very early stages of it!). 
+You can read [CONTRIBUTING.md](https://github.com/olivif/github-discovery/blob/master/CONTRIBUTING.md).  
+You can also see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
 
 #### Code style
 
