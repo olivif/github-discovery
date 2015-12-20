@@ -5,11 +5,12 @@
   "directories": {
     "test": "test"
   },
+  "bin": {
+    "gd": "./bin/github-discovery"
+  },
   "dependencies": {
-    "chai": "^3.4.1",
-    "gh-got": "^2.4.0",
+    "commander": "^2.9.0",
     "github-search-repos": "^1.2.1",
-    "request": "^2.67.0",
     "should": "^8.0.2"
   },
   "devDependencies": {

@@ -1,0 +1,16 @@
+#! /usr/bin/env node
+
+var program = require('commander');
+ 
+program
+  .version('0.0.1')
+  .option('-l, --language <l>', 'Filter repos found by language')
+  .option('-n, --number <n>', 'Filter repos found by language', parseInt)
+  .parse(process.argv);
+
+// Args
+console.log("Specified filters: ")
+
+if (program.language) console.log("Language : " + program.language);
+if (program.number) console.log("Number : " + program.number);
+// Language 
