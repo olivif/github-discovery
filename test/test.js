@@ -9,6 +9,15 @@ var utils = require("./../lib/utils");
 var repoHelper = require("./../lib/repoHelper");
 var queryBuilder = require("./../lib/queryBuilder");
 
+const TestConstants = {
+    SampleQuery: "gulp+language:javascript",
+    SampleTopic: "bitcoin",
+    SampleLanguage: "javascript",
+    QueryOptions: {
+        perPage: 10
+    }
+};
+
 describe("repo tests", function() {
   
     it("should be able to print a repo", function(done) {
@@ -52,23 +61,34 @@ describe("githubApi tests", function() {
   
     it("should be able to search repos", function(done) {
         
-        var query = "gulp+language:javascript";
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
         
-        githubApi.searchRepos(query, function(repos) {
+        githubApi.searchRepos(query, options, function(repos) {
             repos.length.should.not.eql(0);
             done();
         })
     });   
+    
+    it("should be able to build a url", function(done) {
+        
+        var url = githubApi.buildUrl(TestConstants.SampleQuery, TestConstants.QueryOptions);
+        
+        url.should.eql("https://api.github.com/search/repositories?q=gulp+language:javascript&per_page=10");
+        
+        done();
+    }); 
+    
 });
 
 describe("queryBuilder tests", function() {
   
     it("should be able to construct query with all args", function(done) {
-        var topic = "myTopic";
-        var language = "javascript";
+        var topic = TestConstants.SampleTopic;
+        var language = TestConstants.SampleLanguage;
         var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
         
-        query.should.eql("myTopic+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated");
+        query.should.eql("bitcoin+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated");
         
         done();
     });   
@@ -78,11 +98,13 @@ describe("discovery end to end tests", function() {
 
     it("should be able to build query and search", function(done) {
        
-        var topic = "bitcoin";
-        var language = "javascript";
+        var topic = TestConstants.SampleTopic;
+        var language = TestConstants.SampleLanguage;
         var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
     
-        githubApi.searchRepos(query, function(repos) {
+        var options = TestConstants.QueryOptions;
+    
+        githubApi.searchRepos(query, options, function(repos) {
             repos.length.should.not.eql(0);
             done();
         })
