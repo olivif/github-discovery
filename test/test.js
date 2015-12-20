@@ -64,8 +64,9 @@ describe("githubApi tests", function() {
         var query = TestConstants.SampleQuery;
         var options = TestConstants.QueryOptions;
         
-        githubApi.searchRepos(query, options, function(repos) {
-            repos.length.should.not.eql(0);
+        githubApi.searchRepos(query, options, function(data) {
+            console.log("Got a response");
+            data.items.length.should.not.eql(0);
             done();
         })
     });   
@@ -85,7 +86,7 @@ describe("githubApi tests", function() {
         var options = TestConstants.QueryOptions;
         
         githubApi.searchReposPage(query, options, function(repos) {
-            repos.length.should.eql(10);
+            repos.items.length.should.eql(10);
             done();
         });
     }); 
@@ -102,7 +103,7 @@ describe("githubApi tests", function() {
         githubApi.searchReposPageInterval(query, options, startPage, endPage).then(function(data) {
             var totalItems = 0;
             data.forEach(function(element) {
-                totalItems += element.length;                
+                totalItems += element.items.length;                
             }, this);
             
             totalItems.should.eql((endPage - startPage + 1) * options.perPage);
@@ -135,8 +136,8 @@ describe("discovery end to end tests", function() {
     
         var options = TestConstants.QueryOptions;
     
-        githubApi.searchRepos(query, options, function(repos) {
-            repos.length.should.not.eql(0);
+        githubApi.searchRepos(query, options, function(data) {
+            data.items.length.should.not.eql(0);
             done();
         })
     });   
