@@ -74,9 +74,40 @@ describe("githubApi tests", function() {
         
         var url = githubApi.buildUrl(TestConstants.SampleQuery, TestConstants.QueryOptions);
         
-        url.should.eql("https://api.github.com/search/repositories?q=gulp+language:javascript&per_page=10");
+        url.should.eql("https://api.github.com/search/repositories?q=gulp+language:javascript&page=1&per_page=10");
         
         done();
+    }); 
+    
+    it("should be able to request a single page with no options", function(done) {
+        
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
+        
+        githubApi.searchReposPage(query, options, function(repos) {
+            repos.length.should.eql(10);
+            done();
+        });
+    }); 
+    
+    it("should be able to request an interval of pages", function(done) {
+
+        this.timeout(3000);
+                
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
+        var startPage = 1;
+        var endPage = 3;
+        
+        githubApi.searchReposPageInterval(query, options, startPage, endPage).then(function(data) {
+            var totalItems = 0;
+            data.forEach(function(element) {
+                totalItems += element.length;                
+            }, this);
+            
+            totalItems.should.eql((endPage - startPage + 1) * options.perPage);
+            done();  
+        });
     }); 
     
 });
