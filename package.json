@@ -13,6 +13,7 @@
     "commander": "^2.9.0",
     "hashmap": "^2.0.4",
     "jscs": "^2.7.0",
+    "list-distribution": "^1.0.1",
     "q": "^1.4.1",
     "request": "^2.67.0",
     "round": "^2.0.1",
