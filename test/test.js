@@ -9,6 +9,16 @@ var utils = require("./../lib/utils");
 var repoHelper = require("./../lib/repoHelper");
 var queryBuilder = require("./../lib/queryBuilder");
 
+const TestConstants = {
+    SampleQuery: "gulp+language:javascript",
+    SampleTopic: "bitcoin",
+    SampleLanguage: "javascript",
+    QueryOptions: {
+        perPage: 10,
+        maxPages: 2
+    }
+};
+
 describe("repo tests", function() {
   
     it("should be able to print a repo", function(done) {
@@ -52,23 +62,74 @@ describe("githubApi tests", function() {
   
     it("should be able to search repos", function(done) {
         
-        var query = "gulp+language:javascript";
+        this.timeout(5000);
         
-        githubApi.searchRepos(query, function(repos) {
-            repos.length.should.not.eql(0);
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
+        
+        githubApi.searchRepos(query, options, function(data) {
+            console.log("Got a response");
+            data.length.should.not.eql(0);
             done();
         })
     });   
+    
+    it("should be able to build a url", function(done) {
+        
+        var url = githubApi.buildUrl(TestConstants.SampleQuery, TestConstants.QueryOptions);
+        
+        url.should.eql("https://api.github.com/search/repositories?q=gulp+language:javascript&page=1&per_page=10");
+        
+        done();
+    }); 
+    
+    it("should be able to request a single page with no options", function(done) {
+        
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
+        
+        githubApi.searchReposPage(query, options, function(repos) {
+            repos.items.length.should.eql(10);
+            done();
+        });
+    }); 
+    
+    it("should be able to request an interval of pages", function(done) {
+
+        this.timeout(3000);
+                
+        var query = TestConstants.SampleQuery;
+        var options = TestConstants.QueryOptions;
+        var startPage = 1;
+        var endPage = 3;
+        
+        githubApi.searchReposPageInterval(query, options, startPage, endPage).then(function(data) {
+            var totalItems = 0;
+            data.forEach(function(element) {
+                totalItems += element.items.length;                
+            }, this);
+            
+            totalItems.should.eql((endPage - startPage + 1) * options.perPage);
+            done();  
+        });
+    }); 
+    
 });
 
 describe("queryBuilder tests", function() {
   
     it("should be able to construct query with all args", function(done) {
-        var topic = "myTopic";
-        var language = "javascript";
+        var topic = TestConstants.SampleTopic;
+        var language = TestConstants.SampleLanguage;
         var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
         
-        query.should.eql("myTopic+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated");
+        query.indexOf(TestConstants.SampleTopic).should.not.eql(-1);
+        query.indexOf(TestConstants.SampleLanguage).should.not.eql(-1);
+        query.indexOf("fork").should.not.eql(-1);
+        query.indexOf("pushed").should.not.eql(-1);
+        query.indexOf("MIT license").should.not.eql(-1);
+        query.indexOf("contribute").should.not.eql(-1);
+        query.indexOf("NOT deprecated").should.not.eql(-1);
         
         done();
     });   
@@ -78,12 +139,14 @@ describe("discovery end to end tests", function() {
 
     it("should be able to build query and search", function(done) {
        
-        var topic = "bitcoin";
-        var language = "javascript";
+        var topic = TestConstants.SampleTopic;
+        var language = TestConstants.SampleLanguage;
         var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
     
-        githubApi.searchRepos(query, function(repos) {
-            repos.length.should.not.eql(0);
+        var options = TestConstants.QueryOptions;
+    
+        githubApi.searchRepos(query, options, function(data) {
+            data.length.should.not.eql(0);
             done();
         })
     });   
