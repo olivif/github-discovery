@@ -3,6 +3,8 @@ node_js:
   - "4.2"
 install:
   - npm install
+before_script:
+  - npm run lint 
 script: 
   - npm run test-travis-1
   - npm run test-travis-2

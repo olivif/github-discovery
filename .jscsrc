@@ -1,0 +1,12 @@
+{
+    "preset": "google",
+    
+    "validateQuoteMarks": "\"",
+    "maximumLineLength": 120,
+    "disallowUnusedParams": true,
+    "validateIndentation": 4,
+    "requireSemicolons": true,
+    "disallowTrailingWhitespace": "ignoreEmptyLines",
+    "requireLineFeedAtFileEnd": false,
+    "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties" 
+}

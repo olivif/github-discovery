@@ -60,4 +60,4 @@ Based on GitHub's [advanced search API](https://help.github.com/articles/searchi
 
 We would love to get contributors on the project :tada: :balloon: (despite being in the very early stages of it!). 
 
-You can read [CONTRIBUTING.md](https://github.com/olivif/github-discovery/blob/master/CONTRIBUTING.md). You can also see a list of the working ideas [here](https://github.com/olivif/github-discovery/blob/master/ideas.md). 
+You can read [CONTRIBUTING.md](https://github.com/olivif/github-discovery/blob/master/CONTRIBUTING.md). You can also see a list of the working tasks [here](https://github.com/olivif/github-discovery/blob/master/tasks.md). 

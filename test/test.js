@@ -25,7 +25,7 @@ describe("repo tests", function() {
         
         var repo = {
             full_name: "Full name",
-            url: "repoUrl"   ,
+            url: "repoUrl",
             stargazers_count: 10,
             watchers_count: 1,
             forks_count: 8
@@ -41,7 +41,7 @@ describe("repo tests", function() {
         output[1].indexOf(repo.forks_count).should.not.eql(-1);
         output[2].indexOf(repo.url).should.not.eql(-1);
         done();
-    });   
+    });
 });
 
 describe("utils tests", function() {
@@ -49,7 +49,7 @@ describe("utils tests", function() {
     it("should return correct last month date string", function(done) {
         
         var now = new Date();
-        var lastMonthString = now.getFullYear() + "-" + (now.getMonth()-1) + "-" + now.getDate();
+        var lastMonthString = now.getFullYear() + "-" + (now.getMonth() - 1) + "-" + now.getDate();
         var lastMonth = utils.getLastMonth();
         
         lastMonth.should.eql(lastMonthString);
@@ -71,8 +71,8 @@ describe("githubApi tests", function() {
             console.log("Got a response");
             data.length.should.not.eql(0);
             done();
-        })
-    });   
+        });
+    });
     
     it("should be able to build a url", function(done) {
         
@@ -81,7 +81,7 @@ describe("githubApi tests", function() {
         url.should.eql("https://api.github.com/search/repositories?q=gulp+language:javascript&page=1&per_page=10");
         
         done();
-    }); 
+    });
     
     it("should be able to request a single page with no options", function(done) {
         
@@ -92,7 +92,7 @@ describe("githubApi tests", function() {
             repos.items.length.should.eql(10);
             done();
         });
-    }); 
+    });
     
     it("should be able to request an interval of pages", function(done) {
 
@@ -106,14 +106,13 @@ describe("githubApi tests", function() {
         githubApi.searchReposPageInterval(query, options, startPage, endPage).then(function(data) {
             var totalItems = 0;
             data.forEach(function(element) {
-                totalItems += element.items.length;                
+                totalItems += element.items.length;
             }, this);
             
             totalItems.should.eql((endPage - startPage + 1) * options.perPage);
-            done();  
+            done();
         });
-    }); 
-    
+    });
 });
 
 describe("queryBuilder tests", function() {
@@ -132,7 +131,7 @@ describe("queryBuilder tests", function() {
         query.indexOf("NOT deprecated").should.not.eql(-1);
         
         done();
-    });   
+    });
 });
 
 describe("discovery end to end tests", function() {
@@ -148,6 +147,6 @@ describe("discovery end to end tests", function() {
         githubApi.searchRepos(query, options, function(data) {
             data.length.should.not.eql(0);
             done();
-        })
-    });   
+        });
+    });
 });
