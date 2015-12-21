@@ -4,7 +4,7 @@ node_js:
 install:
   - npm install
 before_script:
-  - jscs lib test  
+  - npm run lint 
 script: 
   - npm run test-travis-1
   - npm run test-travis-2

@@ -35,9 +35,11 @@ function callMe(maybe) {
 }	
 ```
 
+## JSCS
+We are also using [jscs](https://www.npmjs.com/package/jscs) for code style validation. Run `npm run lint` locally before committing to make sure you haven't broken any of the styles rules.
+
 ## Testing
 The project uses [mocha](http://mochajs.org/) and [should](https://shouldjs.github.io/) for testing; and [codecov](https://codecov.io) for coverage tracking. Tests get run automatically as part of the CI system, so make sure your changes don't break anything. Also make sure you add tests for all new scenarios: unit, integration and end to end tests. You can find a great article on BDD and testing for node [here](http://webapplog.com/tdd/).  
-
 
 ## Pull requests
 First step is to discuss the change on an issue thread in order to make sure everyone is on the same page, it removes unnecessary work. After the change has been agreed to by the community, feel free to fork and make the required changes (don't forget to follow the coding standard and testing practices mentioned above). After you're done, squash your commits into one and submit the PR. Provided everyone is happy, all checks pass (build, tests, code coverage), the PR will get merged in. 

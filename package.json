@@ -26,7 +26,8 @@
     "start": "node lib/index.js",
     "test": "mocha",
     "test-travis-1": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
-    "test-travis-2": "./node_modules/.bin/codecov"
+    "test-travis-2": "./node_modules/.bin/codecov",
+    "lint": "jscs lib test"
   },
   "repository": {
     "type": "git",
