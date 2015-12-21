@@ -14,7 +14,8 @@ const TestConstants = {
     SampleTopic: "bitcoin",
     SampleLanguage: "javascript",
     QueryOptions: {
-        perPage: 10
+        perPage: 10,
+        maxPages: 2
     }
 };
 
@@ -61,12 +62,14 @@ describe("githubApi tests", function() {
   
     it("should be able to search repos", function(done) {
         
+        this.timeout(5000);
+        
         var query = TestConstants.SampleQuery;
         var options = TestConstants.QueryOptions;
         
         githubApi.searchRepos(query, options, function(data) {
             console.log("Got a response");
-            data.items.length.should.not.eql(0);
+            data.length.should.not.eql(0);
             done();
         })
     });   
@@ -120,7 +123,13 @@ describe("queryBuilder tests", function() {
         var language = TestConstants.SampleLanguage;
         var query = queryBuilder.buildQuery(topic, language, true, true, true, true, true);
         
-        query.should.eql("bitcoin+language:javascript+fork:true+pushed:>2015-10-20+MIT license in:readme+contribute in:readme+NOT deprecated");
+        query.indexOf(TestConstants.SampleTopic).should.not.eql(-1);
+        query.indexOf(TestConstants.SampleLanguage).should.not.eql(-1);
+        query.indexOf("fork").should.not.eql(-1);
+        query.indexOf("pushed").should.not.eql(-1);
+        query.indexOf("MIT license").should.not.eql(-1);
+        query.indexOf("contribute").should.not.eql(-1);
+        query.indexOf("NOT deprecated").should.not.eql(-1);
         
         done();
     });   
@@ -137,7 +146,7 @@ describe("discovery end to end tests", function() {
         var options = TestConstants.QueryOptions;
     
         githubApi.searchRepos(query, options, function(data) {
-            data.items.length.should.not.eql(0);
+            data.length.should.not.eql(0);
             done();
         })
     });   
