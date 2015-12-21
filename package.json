@@ -11,9 +11,11 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
+    "hashmap": "^2.0.4",
     "jscs": "^2.7.0",
     "q": "^1.4.1",
     "request": "^2.67.0",
+    "round": "^2.0.1",
     "should": "^8.0.2"
   },
   "devDependencies": {
@@ -24,7 +26,7 @@
   },
   "scripts": {
     "start": "node lib/index.js",
-    "test": "mocha",
+    "test": "npm run lint && mocha",
     "test-travis-1": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec",
     "test-travis-2": "./node_modules/.bin/codecov",
     "lint": "jscs lib test"

@@ -1,8 +1,10 @@
 #! /usr/bin/env node
 
-var program = require("commander");
-var main = require("../lib/index");
-var queryBuilder = require("../lib/queryBuilder");
+const program = require("commander");
+
+const main = require("../lib/index");
+const queryBuilder = require("../lib/queryBuilder");
+const ranker = require("../lib/ranker");
  
 program
   .version("0.0.1")
@@ -57,4 +59,7 @@ var query = queryBuilder.buildQuery(
     );
 console.log("Query = " + query);
 
-main.run(query);
+main.run(query, false, function(items) {
+    ranker.analyzeDistribution(
+        items, function(repo) { return repo.forks_count}, "ForksCount");
+});
